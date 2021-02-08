@@ -1,0 +1,22 @@
+
+
+{
+  "en": {
+    "language": "What language do you speak?",
+    "welcome": "Welcome to the Calculator", 
+    "num1Prompt": "What is the first number?", 
+    "num2Prompt": "What is the second number?", 
+    "operatorPrompt": "What's the operator?\n (+,-,*,/)",
+    "anotherPrompt": "Would you like to perform another calculation?",
+    "invalidMessage": "Hmm... that doesn't look like a valid number."
+  },
+
+  "fr": {
+    "welcome": "Oui Oui", 
+    "num1Prompt": "Oui, What is the first number?", 
+    "num2Prompt": "Oui,What is the second number?", 
+    "operatorPrompt": "Oui,What's the operator?\n (+,-,*,/)",
+    "anotherPrompt": "Oui,Would you like to perform another calculation?",
+    "invalidMessage": "Oui, Hmm... that doesn't look like a valid number."
+  }
+}
