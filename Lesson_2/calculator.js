@@ -8,11 +8,16 @@ const MESSAGES = require('./calculator_messages.json');
 const LANGUAGE = 'fr';
 const readline = require('readline-sync');
 
+function prompt(message) {
+  console.log(`=> ${message}`);
+}
+
+
 function prompt(MESSAGES) {
   console.log(`=> ${MESSAGES}`);
 }
 
-function messages(message, lang='en'){
+function messages(message, lang = 'en') {
   return MESSAGES[lang][message];
 }
 
@@ -22,7 +27,7 @@ function invalidNumber(number) {
 
 prompt(messages('welcome', LANGUAGE));
 
-while(true) {
+while (true) {
 
   prompt(messages('num1Prompt', LANGUAGE));
   let num1 = readline.question();
@@ -31,9 +36,14 @@ while(true) {
     prompt(messages(invalidMessage, LANGUAGE));
     num1 = readline.question();
   }
-  
+
   prompt(messages('num2Prompt', LANGUAGE));
   let num2 = readline.question();
+
+  while (invalidNumber(num2)) {
+    prompt(messages(invalidMessage, LANGUAGE));
+    num1 = readline.question();
+  }
 
   prompt(messages('operatorPrompt', LANGUAGE));
   let operator = readline.question();
@@ -44,27 +54,26 @@ while(true) {
   }
 
   let output;
-    switch  (operator) {
-      case '+' :
-        output = Number(num1) + Number(num2);
-        break;
-      case '-' :
-        output = Number(num1) - Number(num2);
-        break;
-      case '*' :
-        output = Number(num1) * Number(num2);
-        break;
-      case '/' :
-        output = Number(num1) / Number(num2);
-        break;
-      default: output = ("I can't process that information, please enter valid values");
-    }
+  switch  (operator) {
+    case '+' :
+      output = Number(num1) + Number(num2);
+      break;
+    case '-' :
+      output = Number(num1) - Number(num2);
+      break;
+    case '*' :
+      output = Number(num1) * Number(num2);
+      break;
+    case '/' :
+      output = Number(num1) / Number(num2);
+      break;
+    default: output = ("I can't process that information, please enter valid values");
+  }
   prompt(`The answer is ${output}.`);
 
 
-  prompt(messages('anotherPrompt', LANGUAGE))
+  prompt(messages('anotherPrompt', LANGUAGE));
   let answer = readline.question();
-      if (answer[0].toLowerCase()  !== 'y') break;
+  if (answer[0].toLowerCase()  !== 'y') break;
 
-  
 }

@@ -1,0 +1,12 @@
+
+
+ {
+  
+    "welcome": "Welcome to the Payment Calculator", 
+    "loanAmountPrompt": "How much would you like to borrow?", 
+    "loanDurationYearsPrompt": "How many years do you want to pay on your loan?", 
+    "APRPrompt": "What is the Annual Percentage Rate? (For example: 3.8)",
+    "anotherPrompt": "Would you like to perform another calculation? y or n",
+    "invalidNumberMessage": "Please enter a number that is greater than zero."
+  }
+
