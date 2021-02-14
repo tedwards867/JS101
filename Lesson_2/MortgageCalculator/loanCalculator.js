@@ -10,6 +10,10 @@ function invalidNumber(number) {
   return number.trimStart() === '' || Number.isNaN(Number(number)) || number <= '0';
 }
 
+function invalidIntRate(number) {
+  return number.trimStart() === '' || Number.isNaN(Number(number)) || number < '0';
+}
+
 prompt(MESSAGES.welcome);
 
 //add while loop for another calculation
@@ -30,20 +34,26 @@ while (true) {
     prompt(MESSAGES.invalidNumberMessage);
     loanDurationYears = readline.question();
   }
-  prompt(MESSAGES['APRPrompt']);
-  let APR = readline.question();
-  let loanDurationMonths = parseInt(loanDurationYears * 12);
-
-
-  let monthlyInterestRate = parseFloat(APR) / loanDurationMonths;
-  let monthlyPayment;
-  if (APR > 0) {
-    monthlyPayment = parseFloat(loanAmount * (monthlyInterestRate /
-       (1 - ((1 + monthlyInterestRate) ** (-loanDurationMonths))))).toFixed(2);
-  } else {
-    monthlyPayment = parseFloat(loanAmount / loanDurationMonths).toFixed;
+  prompt(MESSAGES['interestRatePrompt']);
+  let interestRate = readline.question();
+  while (invalidIntRate(interestRate)) {
+    prompt(MESSAGES.invalidIntRateMessage);
+    interestRate = readline.question();
   }
-  prompt(`Your monthly payment for ${loanDurationYears} years will be $${monthlyPayment}`);
+
+  let APR = parseFloat(interestRate / 100);
+  let loanDurationMonths = Number(loanDurationYears) * 12;
+
+  let monthlyInterestRate = APR / 12;
+  let monthlyPayment;
+  if (interestRate > 0) {
+    monthlyPayment = parseFloat(loanAmount *
+      (monthlyInterestRate /
+      (1 - Math.pow((1 + monthlyInterestRate), (-loanDurationMonths)))));
+  } else {
+    monthlyPayment = parseFloat(loanAmount / loanDurationMonths);
+  }
+  prompt(`Your monthly payment for ${loanDurationYears} years will be $${monthlyPayment.toFixed(2)}`);
 
   //end another calcuation loop
   prompt(MESSAGES.anotherPrompt);
