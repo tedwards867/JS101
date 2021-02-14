@@ -41,10 +41,10 @@ while (true) {
     interestRate = readline.question();
   }
 
-  let APR = parseFloat(interestRate / 100);
+  let annualPercentageRate = parseFloat(interestRate / 100);
   let loanDurationMonths = Number(loanDurationYears) * 12;
 
-  let monthlyInterestRate = APR / 12;
+  let monthlyInterestRate = annualPercentageRate / 12;
   let monthlyPayment;
   if (interestRate > 0) {
     monthlyPayment = parseFloat(loanAmount *
