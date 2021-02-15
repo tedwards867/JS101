@@ -14,6 +14,14 @@ function invalidIntRate(number) {
   return number.trimStart() === '' || Number.isNaN(Number(number)) || number < '0';
 }
 
+function paymentCalculationWithInterest(loanAmount,
+  monthlyInterestRate, loanDurationMonths) {
+  let payment = parseFloat(loanAmount *
+    (monthlyInterestRate /
+    (1 - Math.pow((1 + monthlyInterestRate), (-loanDurationMonths)))));
+  return payment;
+}
+
 prompt(MESSAGES.welcome);
 
 //add while loop for another calculation
@@ -47,9 +55,8 @@ while (true) {
   let monthlyInterestRate = annualPercentageRate / 12;
   let monthlyPayment;
   if (interestRate > 0) {
-    monthlyPayment = parseFloat(loanAmount *
-      (monthlyInterestRate /
-      (1 - Math.pow((1 + monthlyInterestRate), (-loanDurationMonths)))));
+    monthlyPayment = paymentCalculationWithInterest(loanAmount,
+      monthlyInterestRate, loanDurationMonths);
   } else {
     monthlyPayment = parseFloat(loanAmount / loanDurationMonths);
   }
@@ -58,10 +65,8 @@ while (true) {
   //end another calcuation loop
   prompt(MESSAGES.anotherPrompt);
   let anotherCalc = readline.question();
-  if (anotherCalc[0].toLowerCase()  !== 'y') {
+  if (anotherCalc.toLowerCase()  !== 'y') {
     break;
-  } else {
-    console.clear();
   }
-
+  console.clear();
 }
