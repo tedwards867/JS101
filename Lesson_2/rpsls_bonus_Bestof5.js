@@ -1,5 +1,5 @@
 const readline = require('readline-sync');
-const MAX_WINS = 5; //update logic for max wins/rounds
+const MAX_WINS = 5;
 const VALID_CHOICES = {
   rock:     'r',
   paper:    'p',
@@ -28,11 +28,12 @@ const WINNING_COMBOS = {
 function prompt(message) {
   console.log(`=> ${message}`);
 }
-//unit tested
+
 function playerWon(humanChoice, computerChoice) {
   return WINNING_COMBOS[humanChoice].includes(computerChoice);
 }
-//unit tested
+
+
 function displayWinner(humanChoice, computerChoice) {
   if (playerWon(humanChoice, computerChoice)) {
     return "You win this round!";
@@ -43,7 +44,7 @@ function displayWinner(humanChoice, computerChoice) {
   }
 }
 
-//unit tested
+
 function keepScore(humanChoice, computerChoice) {
   if (playerWon(humanChoice, computerChoice)) {
     scores.humanScore += 1;
@@ -54,17 +55,39 @@ function keepScore(humanChoice, computerChoice) {
   }
 }
 
+function resetScores(scores, MAX_WINS) {
+  scores.humanScore = 0;
+  scores.computerScore = 0;
+  scores.ties = 0;
+}
 
-//unit tested
-function displayGameStatus(scores, MAX_WINS) {
-  prompt(`Your score is ${scores.humanScore}.  The computer's score is ${scores.computerScore}.`);
-  if (scores.humanScore === MAX_WINS) {
-    prompt('You are the grand master!');
-  } else if (scores.computerScore === MAX_WINS) {
-    prompt(`The computer won.  Oh well.`);
+function gameOver(scores, MAX_WINS) {
+  if (scores.humanScore === MAX_WINS ||
+    scores.computerScore === MAX_WINS) {
+    playAgain();
   }
 }
 
+function displayGameStatus(scores, MAX_WINS) {
+  prompt(`GAME STATUS: Your score is ${scores.humanScore}.  The computer's score is ${scores.computerScore}.\n`);
+  if (scores.humanScore === MAX_WINS) {
+    prompt('----------You are the grand master!----------');
+  } else if (scores.computerScore === MAX_WINS) {
+    prompt(`---------The computer won.  Oh well.---------`);
+  }
+}
+
+function playAgain() {
+  prompt('Do you want to play again? (y/n)');
+  let answer = readline.question().toLowerCase();
+  while (answer !== 'n' && answer !== 'y') {
+    prompt('Please enter "y" or "n".');
+    answer = readline.question().toLowerCase();
+  }
+  if (answer === 'y') {
+    resetScores(scores);
+  }
+}
 
 function randomSelection() {
   let randomIndex = Math.floor(
@@ -74,34 +97,30 @@ function randomSelection() {
 
 prompt(`Let's play "Rock, Paper, Scissors, Lizard, Spock" Best of ${MAX_WINS}!`);
 
-let answer = 'y';
 
 //game loop
-while (answer === 'y') {
-  prompt(`Choose: ${VALID_WORDS.join(', ')} or the corresponding abbreviation ${VALID_ABBREVIATIONS.join(', ')}`);
+while (scores.humanScore < MAX_WINS && scores.computerScore < MAX_WINS) {
+
+
+  prompt(`Choose: ${VALID_WORDS.join(', ')} or the corresponding abbreviation ${VALID_ABBREVIATIONS.join(', ')}\n`);
   let humanChoice = readline.question().toLowerCase();
 
+  if (Object.values(VALID_CHOICES).includes(humanChoice)) {
+    humanChoice =
+    Object.keys(VALID_CHOICES).find(key => VALID_CHOICES[key] === humanChoice);
+  }
 
-  while (!(VALID_WORDS.includes(humanChoice)) 
-  || (VALID_ABBREVIATIONS.includes(humanChoice))) {
+  while (!VALID_WORDS.includes(humanChoice)) {
     prompt("That is not a valid choice");
     humanChoice = readline.question().toLowerCase();
   }
 
-
   let computerChoice = randomSelection();
 
-  prompt(`You chose ${humanChoice}, and the Computer chose ${computerChoice}.`);
+  prompt(`You chose ${humanChoice}, and the Computer chose ${computerChoice}.\n`);
 
   displayWinner(humanChoice, computerChoice);
   keepScore(humanChoice, computerChoice);
   displayGameStatus(scores, MAX_WINS);
-
-  prompt('Do you want to play again? (y/n)');
-  answer = readline.question().toLowerCase();
-  while (answer !== 'n' && answer !== 'y') {
-    prompt('Please enter "y" or "n".');
-    answer = readline.question().toLowerCase();
-    console.clear();
-  }
+  gameOver(scores, MAX_WINS);
 }
