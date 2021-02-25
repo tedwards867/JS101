@@ -55,7 +55,7 @@ function keepScore(humanChoice, computerChoice) {
   }
 }
 
-function resetScores(scores, MAX_WINS) {
+function resetScores(scores) {
   scores.humanScore = 0;
   scores.computerScore = 0;
   scores.ties = 0;
@@ -71,9 +71,9 @@ function gameOver(scores, MAX_WINS) {
 function displayGameStatus(scores, MAX_WINS) {
   prompt(`GAME STATUS: Your score is ${scores.humanScore}.  The computer's score is ${scores.computerScore}.\n`);
   if (scores.humanScore === MAX_WINS) {
-    prompt('----------You are the grand master!----------');
+    prompt('----------You are the grand master!----------\n');
   } else if (scores.computerScore === MAX_WINS) {
-    prompt(`---------The computer won.  Oh well.---------`);
+    prompt(`---------The computer won.  Oh well.---------\n`);
   }
 }
 
@@ -86,6 +86,7 @@ function playAgain() {
   }
   if (answer === 'y') {
     resetScores(scores);
+    console.clear();
   }
 }
 
@@ -117,7 +118,7 @@ while (scores.humanScore < MAX_WINS && scores.computerScore < MAX_WINS) {
 
   let computerChoice = randomSelection();
 
-  prompt(`You chose ${humanChoice}, and the Computer chose ${computerChoice}.\n`);
+  prompt(`You chose ${humanChoice.toUpperCase()}, and the Computer chose ${computerChoice.toUpperCase()}.`);
 
   displayWinner(humanChoice, computerChoice);
   keepScore(humanChoice, computerChoice);
