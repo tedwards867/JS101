@@ -12,7 +12,7 @@ const VALID_WORDS = Object.keys(VALID_CHOICES);
 const VALID_ABBREVIATIONS = Object.values(VALID_CHOICES);
 
 let scores = {
-  humanScore: 3,
+  humanScore: 0,
   computerScore: 0,
   ties: 0,
 };
@@ -36,11 +36,11 @@ function playerWon(humanChoice, computerChoice) {
 
 function displayWinner(humanChoice, computerChoice) {
   if (playerWon(humanChoice, computerChoice)) {
-    return "You win this round!";
+    prompt("You win this round!") ;
   } else if ((playerWon(computerChoice, humanChoice))) {
-    return  "Computer Wins this round!";
+    prompt("Computer Wins this round!");
   } else {
-    return "This round is a tie!";
+    prompt("This round is a tie!");
   }
 }
 
