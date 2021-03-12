@@ -36,7 +36,7 @@ function playerWon(humanChoice, computerChoice) {
 
 function displayWinner(humanChoice, computerChoice) {
   if (playerWon(humanChoice, computerChoice)) {
-    prompt("You win this round!") ;
+    prompt("You win this round!");
   } else if ((playerWon(computerChoice, humanChoice))) {
     prompt("Computer Wins this round!");
   } else {
@@ -96,6 +96,16 @@ function randomSelection() {
   return Object.keys(VALID_CHOICES)[randomIndex];
 }
 
+function convertHumanChoice(humanChoice) {
+  if (Object.values(VALID_CHOICES).includes(humanChoice)) {
+    humanChoice =
+    Object.keys(VALID_CHOICES).find(key => VALID_CHOICES[key] === humanChoice);
+  } else if (!Object.values(VALID_CHOICES).includes(humanChoice)) {
+    humanChoice = 'Error';
+  }
+  return humanChoice;
+}
+
 prompt(`Let's play "Rock, Paper, Scissors, Lizard, Spock" Best of ${MAX_WINS}!`);
 
 
@@ -106,12 +116,11 @@ while (scores.humanScore < MAX_WINS && scores.computerScore < MAX_WINS) {
   prompt(`Choose: ${VALID_WORDS.join(', ')} or the corresponding abbreviation ${VALID_ABBREVIATIONS.join(', ')}\n`);
   let humanChoice = readline.question().toLowerCase();
 
-  if (Object.values(VALID_CHOICES).includes(humanChoice)) {
-    humanChoice =
-    Object.keys(VALID_CHOICES).find(key => VALID_CHOICES[key] === humanChoice);
+  if (humanChoice === !Object.keys(VALID_CHOICES).includes(humanChoice)) {
+    convertHumanChoice(humanChoice);
   }
 
-  while (!VALID_WORDS.includes(humanChoice)) {
+  while (humanChoice === 'Error') {
     prompt("That is not a valid choice");
     humanChoice = readline.question().toLowerCase();
   }

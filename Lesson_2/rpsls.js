@@ -1,13 +1,20 @@
 const readline = require('readline-sync');
-const VALID_CHOICES = ['rock', 'paper', 'scissors'];
+const VALID_CHOICES = ['rock', 'paper', 'scissors','lizard', 'spock'];
 
 
 
 function displayWinner(choice, computerChoice) {
   prompt(`You chose ${choice} and the computer choose ${computerChoice}.`);
-  if ((choice === 'rock' && computerChoice === 'scissors') ||
-      (choice === 'paper' && computerChoice === 'rock') ||
-      (choice === 'scissors' && computerChoice === 'paper')) {
+  if ((choice === 'rock' &&
+        (computerChoice === 'scissors' || computerChoice === 'lizard')) ||
+      (choice === 'paper' &&
+        (computerChoice === 'rock' || computerChoice === 'spock')) ||
+      (choice === 'scissors' &&
+        (computerChoice === 'paper' || computerChoice === 'lizard')) ||
+      (choice === 'spock' &&
+          (computerChoice === 'rock' || computerChoice === 'scissors')) ||
+      (choice = 'lizard' &&
+          (computerChoice === 'spock' || computerChoice === 'papar'))) {
     return 'You win!';
   } else if (choice === computerChoice) {
     return "It's a tie!";
