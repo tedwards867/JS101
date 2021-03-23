@@ -23,19 +23,19 @@
 const readlineSync = require('readline-sync');
 
 function calculateSumOfRange(endInteger) {
-  let sum = 0;
+  let total = 0;
   for (let i = 1; i <= endInteger; i +=1) {
-    sum = sum + i;
+    total = total + i;
   }
-  
+  return total;
 }
 
 function calculateProductOfRange(endInteger) {
-  let product = 1;
+  let total = 1;
   for (let i = 1; i <= endInteger; i +=1) {
-    product = product * i;
+    total = total * i;
   }
-  console.log(`The product of the integers between 1 and ${endInteger} is ${product}.`)
+  return total;
 }
 
 function calculateIntegers() {
@@ -56,10 +56,13 @@ function calculateIntegers() {
   }
 
   if (operand === 's') {
-    calculateSumOfRange(endInteger);
+    let sum = calculateProductOfRange(endInteger)
+    console.log(`The sum of the integers between 1 and ${endInteger} is ${sum}.`)
   } else if (operand === 'p'){
-    calculateProductOfRange(endInteger);
+    let product= calculateProductOfRange(endInteger)
+    console.log(`The product of the integers between 1 and ${endInteger} is ${product}.`)
   };
+
 }
 
 calculateIntegers();
