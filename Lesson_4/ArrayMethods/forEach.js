@@ -24,3 +24,24 @@ produceKeyValues.forEach(keyValue => {
 // carrot is a Vegetable
 // pear is a Fruit
 // broccoli is a Vegetable
+
+let words = ['one', 'two', 'three', 'four']
+words.forEach(function(word) {
+  console.log(word)
+  if (word === 'four') {
+    words.shift() //'one' will delete from array
+  }
+}) // one // two // four
+
+console.log(words);  //['two', 'three', 'four']
+
+let numbers = [ 1, 2, 3, 4, 5 ]
+numbers.forEach(function(number){
+ let newNum = 3;
+  if (number === newNum) {
+    numbers.splice(numbers.indexOf(newNum),1);
+  }
+})
+console.log(numbers)
+
+

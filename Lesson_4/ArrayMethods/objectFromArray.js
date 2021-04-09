@@ -5,30 +5,19 @@ let flintstones = ["Fred", "Barney", "Wilma", "Betty", "Pebbles", "Bambam"];
 
 
 
-//put the value of the element into the object.key
-//put the index of the element into the object.value
+//totally over thought this.  this is LS's solution
 
-//transform into sub arrays
-//first create inner array ["Fred", 0]
-function transformArrToObject(array) {
-  //let newArray = [];
-  let subArray  = [];
-  // for(outer = 0; outer < flintstones.length; outer += 1) {
-  
-   for (i = 0; i < flintstones.length ; i += 1) {
-     for (j = 0, j < flintstones.length; j += 1 ) {
-       let 
-     }ter
-      let key = array[i];
-      let value = i
-      subArray.push(key);
-      subArray.push(value)
-    
-      }
-    return subArray;
-  //  newArray.push(subArray);
-  // }
- //return newArray;
-}
+let flintstonesObj = {};
+flintstones.forEach((name, index) => {
+  flintstonesObj[name] = index;
+})
 
-console.log(transformArrToObject(flintstones));
+console.log(flintstonesObj);
+
+let arr = flintstones;
+let newObj = {}
+
+arr.forEach((currentValue, indexOfCurrentValue) => {
+  newObj[currentValue] = indexOfCurrentValue;
+});
+console.log(newObj);

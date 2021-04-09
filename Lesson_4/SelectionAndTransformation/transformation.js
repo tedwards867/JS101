@@ -72,3 +72,44 @@ function multiply(numbers, multiplier) {
   return multipledNums;
 }
 console.log(multiply(myNumbers, 3)); // => [3, 12, 9, 21, 6, 18])
+
+//Create an object that expresses the frequency with which each letter occurs in this string:
+
+let statement = "The Flintstones Rock";
+
+//P: count the number of times a letter appears in the phrase.  Results are case sensitive.
+//E: { T: 1, h: 1, e: 2, F: 1, l: 1, ... }
+//D: string as input, object as output
+//A: 
+//?create an empty object
+//?iterate over the string
+//?for each unique letter, create a key
+  //* if (char is not key in Object then char[] = )
+//?for each instance of the letter increment the value of that key
+//C
+
+
+function countLetters(sentence) {
+  let letterObj = {};
+  let sentenceArray = sentence.split('').filter(elem => elem != ' ')  // i got this part right
+ 
+
+  sentenceArray.forEach(elem => {   // i got this part right
+   
+    letterObj[elem] = letterObj[elem] || 0;  /// i didn't get this part forward though
+    letterObj[elem] += 1;
+    
+  });
+
+
+  return letterObj
+  }
+console.log(countLetters(statement))
+// arr.forEach((currentValue, indexOfCurrentValue) => {
+//   newObj[currentValue] = indexOfCurrentValue;
+// });
+// sentence.forEach(elem => {
+//   if(elem) {
+//    Object.value(letterObj) =  Object.value(letterObj) + 1
+//   }
+// });
